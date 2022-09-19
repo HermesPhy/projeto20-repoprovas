@@ -1,0 +1,10 @@
+import { prisma } from "./../../src/database";
+
+export default async function createTerms() {
+  await prisma.term.createMany({
+    data: [{ number: 1 }, { number: 2 }, { number: 3 }],
+    skipDuplicates: true,
+  });
+
+  return await prisma.term.findMany();
+}
