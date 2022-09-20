@@ -1,13 +1,13 @@
 import { faker } from "@faker-js/faker";
 import supertest from "supertest";
 
+import { prisma } from "./../src/database";
 import app from "./../src/app";
 import {
   createScenarioOneTeacherWithOneTest,
   createScenarioTwoTeachersWithTwoTestsEach,
   deleteAllData,
 } from "./factories/scenarioFactory";
-import { prisma } from "./../src/database";
 import userFactory from "./factories/userFactory";
 import { tokenFactory } from "./factories/tokenFactory";
 import { CreateTestData } from "../src/services/testService";
