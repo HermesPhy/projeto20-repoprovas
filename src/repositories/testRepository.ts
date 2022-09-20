@@ -4,6 +4,16 @@ import { prisma } from "../database";
 
 async function getTestsByDiscipline(discipline: string) {
   return prisma.term.findMany({
+    where: {
+      disciplines: {
+        some: {
+          AND: {
+            name: discipline,
+            teacherDisciplines: { some: { tests: { some: {} } } },
+          },
+        },
+      },
+    },
     include: {
       disciplines: {
         include: {
@@ -25,6 +35,9 @@ async function getTestsByDiscipline(discipline: string) {
 
 async function getTestsByTeachers(teacher: string) {
   return prisma.teacherDiscipline.findMany({
+    where: {
+      AND: { teacher: { name: teacher }, tests: { some: {} } },
+    },
     include: {
       teacher: true,
       discipline: true,
